@@ -65,6 +65,8 @@
   <main id="main">
 
     <!-- ======= Luhn Algorithm ======= -->
+    <!--Your code should accept a 16-digit string and determine whether or not it is a valid credit card number. -->
+ 
     <section id="luhn" class="align-content-center">
       <div class="container" data-aos="fade-up">
 
@@ -97,7 +99,8 @@
       </div>
     </section><!-- End About Section -->
 
-    <!-- ======= Hamming Code ======= -->
+    <!-- ======= Hamming Code  ======= -->
+    <!--  Create an algorithm to detect and correct errors from 7 bit Hamming Codes -->
     <section id="hamming" class="menu">
       <div class="container" data-aos="fade-up">
 
@@ -105,66 +108,94 @@
           <p>Task <span>2</span></p>
           <h2>Hamming Code</h2>
         </div>
-          <div class="col d-flex justify-content-center">
-            <div class="row nav-row">
-              <input type="text" class="form-control" id="hammingCode" placeholder="Enter 7-bit Hamming code here"> 
-              <p>  </p>
-              <button class="btn btn-outline-primary mr-1"onclick="checkCode()">Check Code</button>
-            </div>
-            
+        <div class="col d-flex justify-content-center">
+          <div class="row nav-row">
+            <input type="text" class="form-control" id="hammingCode" placeholder="Enter 7-bit Hamming code here"> 
+            <p>  </p>
+            <button class="btn btn-outline-primary mr-1"onclick="checkCode()">Check Code</button>
           </div>
+          
+        </div>
 
-          <div class="section-header">
-            <h2 id="hammingResult"></h2>
-          </div>
-        
-
-        
-
+        <div class="section-header">
+          <h2 id="hammingResult"></h2>
+        </div>
       </div>
     </section><!-- End Hamming Code -->
 
 
-    <!-- ======= Bruteforce ======= -->
+    <!-- ======= Bruteforce =======  -->
+    
+    <!--The brute force program should use the following two types of attacks: -->
+    <!--Set A - Any password which contains a maximum of six lower-case letters and/or numbers; -->
+    <!--Set B – Use a Dictionary attack to try and crack the password. You may use resources available online to create the Dictionary.-->
     <section id="brute" class="events">
       <div class="container-fluid" data-aos="fade-up">
 
         <div class="section-header">
-          <h2>Events</h2>
-          <p>Share <span>Your Moments</span> In Our Restaurant</p>
+          <p>Task  <span>3</span></p>
+          <h2>Bruteforce</h2>
         </div>
+        <div class="container">
+          <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#setA" type="button" role="tab" aria-controls="setA" aria-selected="true">Set A</button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#setB" type="button" role="tab" aria-controls="setB" aria-selected="false">Set B</button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <!-- ======= Set A ( Generate Password) ======= -->
+            <div class="tab-pane fade show active" id="setA" role="tabpanel" aria-labelledby="setA-tab">
+              <div class="container" data-aos="fade-up">
 
-        <div class="slides-3 swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
+                <div class="section-header">
+                  <h2>Bruteforce with generated wordlist</h2>
+                </div>
+                <div class="col d-flex justify-content-center">
+                  <div class="row nav-row">
+                    <input type="text" class="form-control" id="setAinput" placeholder="Enter Password"> 
+                    <p>  </p>
+                    <button class="btn btn-outline-primary mr-1"onclick="crackA()">Check Code</button>
+                  </div>
+                  
+                </div>
+        
+                <div class="section-header">
+                  <h2 id="hammingResult"></h2>
+                </div>
+              </div>
+         
+            </div>
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-1.jpg)">
-              <h3>Custom Parties</h3>
-              <div class="price align-self-start">$99</div>
-              <p class="description">
-                Quo corporis voluptas ea ad. Consectetur inventore sapiente ipsum voluptas eos omnis facere. Enim facilis veritatis id est rem repudiandae nulla expedita quas.
-              </p>
-            </div><!-- End Event item -->
+            <!-- ======= Set B (Dictionary) ======= -->
+            <div class="tab-pane fade" id="setB" role="tabpanel" aria-labelledby="setB-tab">
+              
+              <div class="container" data-aos="fade-up">
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-2.jpg)">
-              <h3>Private Parties</h3>
-              <div class="price align-self-start">$289</div>
-              <p class="description">
-                In delectus sint qui et enim. Et ab repudiandae inventore quaerat doloribus. Facere nemo vero est ut dolores ea assumenda et. Delectus saepe accusamus aspernatur.
-              </p>
-            </div><!-- End Event item -->
+                <div class="section-header">
+                  <h2>Bruteforce dictionary</h2>
+                </div>
+                <div class="col d-flex justify-content-center">
+                  <div class="row nav-row">
+                    <input type="text" class="form-control" id="setBpw" placeholder="Enter Password"> 
+                    <p>  </p>
+                    <button class="btn btn-outline-primary mr-1" onclick="checksetB()">Dictionary Atack</button>
+                  </div>
+                  
+                </div>
+        
+                <div class="section-header">
+                  <h2 id="setBresult"></h2>
+                </div>
+              </div>
 
-            <div class="swiper-slide event-item d-flex flex-column justify-content-end" style="background-image: url(assets/img/events-3.jpg)">
-              <h3>Birthday Parties</h3>
-              <div class="price align-self-start">$499</div>
-              <p class="description">
-                Laborum aperiam atque omnis minus omnis est qui assumenda quos. Quis id sit quibusdam. Esse quisquam ducimus officia ipsum ut quibusdam maxime. Non enim perspiciatis.
-              </p>
-            </div><!-- End Event item -->
-
+            </div>
           </div>
-          <div class="swiper-pagination"></div>
         </div>
-
+        
+        
       </div>
     </section><!-- End Bruteforce -->
 
@@ -360,6 +391,8 @@
    <!-- Main Functions JS files -->
    <script src="assets/js/luhn.js"></script>
    <script src="assets/js/hamming.js"></script>
+   <script src="assets/js/bruteforce1.js"></script>
+   <script src="assets/js/bruteforce2.js"></script>
 
 </body>
 
