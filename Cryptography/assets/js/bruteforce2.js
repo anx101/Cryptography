@@ -1,4 +1,4 @@
-  function dictionaryAtk(){
+function dictionaryAtk(){
   const fileUrl = 'assets/txt/dictionary.txt';
   var userInput = document.getElementById("setBinput").value;
 
@@ -10,12 +10,10 @@
       reader.onload = function() {
         const lines = this.result.split('\n');
         
-        console.log(userInput)
-         
-        // Search for a match in the `lines` array
+        // Search for a match in the lines array
         for (let i = 0; i < lines.length; i++) {
-          if (lines[i] === userInput) {
-            window.alert('Match found!');
+          if (lines[i].split("\r")[0]  === userInput && userInput.length !== 0) {
+            document.getElementById("brute2result").innerHTML = "Match Found! <br> The password is: " + userInput;
             break;
           }
         }
