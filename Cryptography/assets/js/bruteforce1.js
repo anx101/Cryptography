@@ -27,9 +27,11 @@ for (let length = 1; length <= 6; length++) {
       words.push(word);
       if (word === userInput) break;
       }
+
       const endTime = performance.now();   // Stop the timer
       // Calculate the time it took to find the password
       const timeTaken = (endTime - startTime) / 1000; // Convert to seconds
+      
     // Stop the outer loop if the user's input has been found
     if (words.includes(userInput)){
       document.getElementById("brute1Result").innerHTML  =
