@@ -81,7 +81,7 @@
 
               <div class="row nav-row">
                   <input type="text" class="form-control"  id="ccNumber"  required placeholder="Enter number">
-                  <button type="submit" class="btn btn-outline-primary mr-1" id="creditcardsubmit">Validate</button>
+                  <button type="submit" class="btn btn-outline-primary mr-1" id="ccValidate">Validate</button>
                 </div> 
           </div>
           <div class="section-header">
@@ -222,14 +222,19 @@
                 <div class="section-header">
                   <h2>Encode A Message</h2>
                 </div>
-                <div class="col text-center">
-                  <h2>Encode an image with a message</h2>
-                  <label>Enter a message to hide within the image:</label><br/>
-                  <input class="form-control"  type="password" id="message" placeholder="Enter your secret message"></br>
-                  <label>Upload an image image:</label><br/>
-                  <input class="form-control" type="file" id="imageLoader" name="imageLoader"/>
-                  <canvas class="img-thumbnail"id="imageCanvas"></canvas>
-                  <canvas id="textCanvas"></canvas>
+                <div class="col d-flex justify-content-center">
+                  <div class="row nav-row">
+                    <label  for="original-message">Secret Message</label><br>
+                    <textarea class="form-control"  id="original-message" ></textarea><br>
+                    <label for="secret-message">Original Message</label><br>
+                    <textarea class="form-control"  id="secret-message"></textarea><br>
+                    <label for="password">Password:</label><br>
+                    <input class="form-control" type="password" id="encodePw"><br><br>
+                    <button class="btn btn-outline-primary mr-1" type="submit" id="encode-button">Encode</button>
+                  </div>
+                </div>
+                <div class="section-header">
+                  <h2 id="encoded-message"></h2>
                 </div>
 
               </div>
@@ -244,11 +249,18 @@
                 <div class="section-header">
                   <h2>Decode A Message</h2>
                 </div>
-                <div>
-                  <h2>Decode an image</h2>
-                  <label>Upload an image:</label><br/>
-                  <input class="form-control" type="file" id="imageLoader2" name="imageLoader2"/>
-                  <canvas class="img-thumbnail" id="imageCanvas2"></canvas>
+                <div class="col d-flex justify-content-center">
+                  <div class="row nav-row">
+                    <label  for="original-message">Original message:</label><br>
+                    <textarea class="form-control"  id="decode-message"></textarea><br>
+                    <label for="password">Password:</label><br>
+                    <input class="form-control" type="password" id="decodePw"><br><br>
+                    <button class="btn btn-outline-primary mr-1" type="submit" id="decode-button">Decode</button>
+                  </div>
+                </div>
+                <div class="section-header">
+                  <p></p> <br>
+                  <h2 id="decoded-message"></h2>
                 </div>
         
                
@@ -276,10 +288,10 @@
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
+  <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
-   <!-- Main Functions JS files -->
+   <!-- Functions JS files -->
    <script src="assets/js/luhn.js"></script>
    <script src="assets/js/hamming.js"></script>
    <script src="assets/js/bruteforce1.js"></script>

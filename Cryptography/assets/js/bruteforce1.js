@@ -29,5 +29,3 @@ for (let length = 1; length <= 6; length++) {
     }
   }
 }
-
-

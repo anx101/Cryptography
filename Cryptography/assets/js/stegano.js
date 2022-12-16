@@ -1,92 +1,100 @@
-var imageLoader = document.getElementById('imageLoader');
-    imageLoader.addEventListener('change', handleImage, false);
-var canvas = document.getElementById('imageCanvas');
-var ctx = canvas.getContext('2d');
-var messageInput = document.getElementById('message');
-
-var textCanvas = document.getElementById('textCanvas');
-var tctx = textCanvas.getContext('2d');
-
-//handle decoding
-var decodeCanvas = document.getElementById('imageCanvas2');
-var dctx = decodeCanvas.getContext('2d');
-var imageLoader2 = document.getElementById('imageLoader2');
-    imageLoader2.addEventListener('change', handleImage2, false);
-
-function handleImage(e){
-    var reader = new FileReader();
-    reader.onload = function(event){
-        var img = new Image();
-        img.onload = function(){
-            canvas.width = img.width;
-            canvas.height = img.height;
-            textCanvas.width=img.width;
-            textCanvas.height=img.height;
-            tctx.font = "30px Arial";
-      var messageText = (messageInput.value.length) ? messageInput.value : 'Hello';
-            tctx.fillText(messageText,10,50);
-            ctx.drawImage(img,0,0);
-            var imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            var textData = tctx.getImageData(0, 0, canvas.width, canvas.height);
-            var pixelsInMsg = 0;
-                pixelsOutMsg = 0;
-            for (var i = 0; i < textData.data.length; i += 4) {
-                if (textData.data[i+3] !== 0) {
-                    if (imgData.data[i+1]%10 == 7) {
-                        //do nothing, we're good
-                    }
-                    else if (imgData.data[i+1] > 247) {
-                        imgData.data[i+1] = 247;
-                    }
-                    else {
-                        while (imgData.data[i+1] % 10 != 7) {
-                            imgData.data[i+1]++;
-                        }
-                    }
-                    pixelsInMsg++;
-                }
-                else {
-                    if (imgData.data[i+1]%10 == 7) {
-                        imgData.data[i+1]--;
-                    }
-                    pixelsOutMsg++;
-                }
-            }
-            console.log('pixels within message borders: '+pixelsInMsg);
-            console.log('pixels outside of message borders: '+pixelsOutMsg);
-            ctx.putImageData(imgData, 0, 0);
-        };
-        img.src = event.target.result;
-    };
-    reader.readAsDataURL(e.target.files[0]);
-}
-
-function handleImage2(e){
-    console.log('handle image 2');
-    var reader2 = new FileReader();
-    reader2.onload = function(event){
-        console.log('reader2 loaded');
-        var img2 = new Image();
-        img2.onload = function(){
-            console.log('img2 loaded');
-            decodeCanvas.width = img2.width;
-            decodeCanvas.height = img2.height;
-            dctx.drawImage(img2,0,0);
-            var decodeData = dctx.getImageData(0, 0, decodeCanvas.width, decodeCanvas.height);
-            for (var i = 0; i < decodeData.data.length; i += 4) {
-                if (decodeData.data[i+1] % 10 == 7) {
-                    decodeData.data[i] = 0;
-                    decodeData.data[i+1] = 0;
-                    decodeData.data[i+2] = 0;
-                    decodeData.data[i+3] = 255;
-                }
-                else {
-                    decodeData.data[i+3] = 0;
-                }
-            }
-            dctx.putImageData(decodeData, 0, 0);
-        };
-        img2.src = event.target.result;
-    };
-    reader2.readAsDataURL(e.target.files[0]);
-}
+const encoderesults = document.getElementById("encoded-message");
+const dencoderesults = document.getElementById("decoded-message");
+document.getElementById("encode-button").addEventListener(
+    "click",
+    function (e) {
+        e.preventDefault();
+        encode(); 
+        },
+    false
+  );
+  document.getElementById("decode-button").addEventListener(
+    "click",
+    function (e) { 
+    e.preventDefault();
+    decode(); 
+    },
+    false
+  );
+  //Encode function to encrypt the message
+  const encode = () => {
+    const secret = document.getElementById("original-message").value;
+    const cover = document.getElementById("secret-message").value.split(" ");
+    const key = document.getElementById("encodePw").value;
+  
+    const encrypt = rc4Encryption(key, secret);
+    const secretmsg = TextZeroWidth(encrypt);
+    const encoded = cover[0] + "﻿" + secretmsg + " " + cover.slice(1).join(" ");
+  
+    encoderesults.innerHTML = encoded;
+    document.getElementById("encoded-message").value = encoded;
+  };
+  //Decode function to get the encrypted message
+  const decode = () => {
+    const cover = document.getElementById("decode-message").value; 
+    const key = document.getElementById("decodePw").value; 
+  
+    const fword = cover.split(" ")[0];
+    const secretmsg = fword.split("﻿").slice(1).join("﻿");
+    const encrypt = zeroWidthToText(secretmsg);
+    const decodedMessage = rc4Encryption(key, encrypt);
+    dencoderesults.innerHTML = decodedMessage;
+  };
+  
+  const rc4Encryption = (key, str) => {
+    var s = [], j = 0, x, res = "";
+    for (var i = 0; i < 256; i++) {
+      s[i] = i;
+    }
+    for (i = 0; i < 256; i++) {
+      j = (j + s[i] + key.charCodeAt(i % key.length)) % 256;
+      x = s[i];
+      s[i] = s[j];
+      s[j] = x;
+    }
+    i = 0;
+    j = 0;
+    for (var y = 0; y < str.length; y++) {
+      i = (i + 1) % 256;
+      j = (j + s[i]) % 256;
+      x = s[i];
+      s[i] = s[j];
+      s[j] = x;
+      res += String.fromCharCode(str.charCodeAt(y) ^ s[(s[i] + s[j]) % 256]);
+    }
+    return res;
+  };
+  
+  const pad = (num) => "00000000".slice(String(num).length) + num;
+  const TextToBinary = (usr) =>usr.split("").map((char) => pad(char.charCodeAt(0).toString(2))).join(" ");
+  const binaryToZeroWidth = (binary) =>binary.split("").map((binaryNum) => {
+        const num = parseInt(binaryNum, 10);
+        if (num === 1) {
+          return "​";
+        } else if (num === 0) {
+          return "‌";
+        }
+        return "";
+      }).join("﻿");
+  
+  const TextZeroWidth = (usr) => {
+    const usrBinary = TextToBinary(usr);
+    return binaryToZeroWidth(usrBinary);
+  };
+  
+  const ZeroWidthBinary = (string) => string.split("﻿").map((char) => {
+        if (char === "​") {
+          return "1";
+        } else if (char === "‌") {
+          return "0";
+        }
+        return " ";
+      }).join("");
+  
+  const BinaryToText = (string) =>string.split(" ").map((num) => String.fromCharCode(parseInt(num, 2))).join("");
+  
+  const zeroWidthToText = (usr) => {
+    const ZeroWidthusr = usr.replace(/[^​‌‍﻿]/g, "");
+    const usrBinary = ZeroWidthBinary(ZeroWidthusr);
+    return BinaryToText(usrBinary);
+  };

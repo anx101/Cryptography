@@ -1,7 +1,7 @@
 function dictionaryAtk(){
   const fileUrl = 'assets/txt/dictionary.txt';
   var userInput = document.getElementById("setBinput").value;
-
+//Add files in dictionary to an array called lines
   fetch(fileUrl)
     .then(response => response.text())
     .then(text => {
