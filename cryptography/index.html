@@ -73,14 +73,58 @@
             <p>Task <span>1</span></p>
             <h2>Credit Card Number Validation</h2>
           </div>
-          
-          <div class="container text-area text-center">
-            <p>This verification system was built using <strong>Luhn Algorithm </strong> </p>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#luhn-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  What is Luhn Algorithm?
+                </button>
+              </h2>
+              <div id="luhn-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">The Luhn algorithm, also known as the "modulus 10" or "mod 10" algorithm, is a simple checksum formula used to validate a variety of identification numbers, 
+                                            such as credit card numbers, IMEI numbers, National Provider Identifier numbers in the US, and Canadian Social Insurance Numbers.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#luhn-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  How does Luhn Algorithm work?
+                </button>
+              </h2>
+              <div id="luhn-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">To compute the checksum, the algorithm follows these steps:
+
+                                            Starting from the rightmost digit (the check digit) and moving left, double the value of every second digit. For example, if the second digit from the right is 4, double it to get 8. If the third digit from the right is 2, double it to get 4.
+                                        
+                                           <br> If any resulting doubled values are greater than 9 (e.g., 8 × 2 = 16), then add the digits of the product (e.g., 16: 1 + 6 = 7).
+                                        
+                                           <br> Take the sum of all the digits.
+                                        
+                                           <br> If the total modulo 10 is equal to 0 (that is, if the total ends in zero) then the number is valid according to the Luhn formula; else it is not valid.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#luhn-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                  Example
+                </button>
+              </h2>
+              <div id="luhn-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">    1. Consider the following credit card number: 4539 1488 0343 6467
+                 <br>2.  Starting from the rightmost digit and moving left, double the value of every second digit: 4_5_3_9_ 1_4_8_8_ 0_3_4_3_ 6_4_6_7
+                 <br>3. Sum the digits of the products (for the digits that were doubled in step 2) and any digits that weren't doubled: 4 + 5 + 3 + 9 + 1 + 4 + 8 + 8 + 0 + 3 + 4 + 3 + 6 + 4 + 6 + 7 = 70
+                 <br>4. If the total modulo 10 is equal to 0 (70 % 10 == 0), the number is valid..</div>
+              </div>
+            </div>
           </div>
+
+            <br>
+
+
           <div class="col d-flex justify-content-center">
 
               <div class="row nav-row">
-                  <input type="text" class="form-control"  id="ccNumber"  required placeholder="Enter number">
+                  <input type="text" class="form-control"  id="ccNumber"  required placeholder="Enter Card Number"> <p></p>
                   <button type="submit" class="btn btn-outline-primary mr-1" id="ccValidate">Validate</button>
                 </div> 
           </div>
@@ -103,8 +147,37 @@
 
         <div class="section-header">
           <p>Task <span>2</span></p>
-          <h2>Hamming Code</h2>
+          <h2>Hamming Code Correction</h2>
         </div>
+
+        <div class="accordion accordion-flush" id="accordionHamming">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingOne">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hamming-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                What is Hamming Code?
+              </button>
+            </h2>
+            <div id="hamming-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionHamming">
+              <div class="accordion-body">Hamming code is a method of error-correcting codes that can be used to detect and correct errors in data transmission or storage. 
+                It was developed by Richard Hamming in the 1950s as a way to improve the reliability of computer data transmission over noisy channels.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hamming-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                How does Hamming Code work?
+              </button>
+            </h2>
+            <div id="hamming-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionHamming">
+              <div class="accordion-body">
+                1100000 T, 1100010 F <br>
+                The basic idea behind Hamming code is to add extra bits to the data being transmitted or stored, called "parity bits," that can be used to detect and correct errors. To create a Hamming code, the data bits are divided into blocks, and a parity bit is added to each block. The parity bits are chosen so that the number of 1s in each block, including the parity bit, is even.</div>
+              
+            </div>
+          </div>
+        </div>
+        <br>
+
         <div class="col d-flex justify-content-center">
           <div class="row nav-row">
             <input type="text" class="form-control" id="hammingCode" placeholder="Enter 7-bit Hamming code here"> 
@@ -133,7 +206,26 @@
           <p>Task  <span>3</span></p>
           <h2>Bruteforce</h2>
         </div>
+
+     
+
+        
         <div class="container">
+          <div class="accordion accordion-flush" id="accordionBrute">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#hamming-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  What is Bruteforce Algorithm?
+                </button>
+              </h2>
+              <div id="hamming-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionBrute">
+                <div class="accordion-body">Brute force is a type of algorithm that tries a large number of possible solutions in sequence until it finds the correct one. It is a relatively simple and straightforward approach, but it can be time-consuming and may not be practical for solving complex problems.
+  
+                  In computer science, brute force is often used as a way to solve problems when no more efficient solution is known. For example, a brute force algorithm might be used to try all possible combinations of passwords until the correct one is found. It is also used in cryptography to try to break codes by trying all possible combinations of keys.</div>
+              </div>
+            </div>
+          </div>
+
           <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#setA" type="button" role="tab" aria-controls="setA" aria-selected="true">Set A</button>
@@ -172,7 +264,7 @@
               <div class="container" data-aos="fade-up">
 
                 <div class="section-header">
-                  <h2>Bruteforce dictionary</h2>
+                  <h2>Bruteforce using dictionary file</h2>
                 </div>
                 <div class="col d-flex justify-content-center">
                   <div class="row nav-row">
@@ -203,9 +295,37 @@
 
         <div class="section-header">
           <p>Task  <span>4</span></p>
-          <h2>Steganography</h2>
+          <h2>Steganography and Stream Cipher</h2>
         </div>
+    
         <div class="container">
+          <div class="accordion accordion-flush" id="accordionHamming">
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stego-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  What is Steganography?
+                </button>
+              </h2>
+              <div id="stego-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionHamming">
+                <div class="accordion-body">Text steganography is the practice of hiding a message within another message or text in such a way that it is not immediately apparent. The hidden message can be revealed by applying a specific process or key. 
+                  Steganography has been used for centuries to send secret messages, and it has become increasingly popular with the rise of the internet and digital communication.</div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stego-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                  What is a Stream Cipher?
+                </button>
+              </h2>
+              <div id="stego-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionHamming">
+                <div class="accordion-body">
+                  Stream cipher is a type of encryption algorithm that encrypts a message one bit or one byte at a time. It uses a key to generate a stream of pseudo-random bits that are combined with the plaintext message to produce the ciphertext. The key is used to seed a pseudorandom number generator, which produces the stream of bits that are used to encrypt the message. 
+                  Stream ciphers are fast and efficient, but they can be vulnerable to certain types of attacks, such as known-plaintext attacks, if the key is not changed frequently enough.</div>
+                
+              </div>
+            </div>
+          </div>
+
           <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#encode" type="button" role="tab" aria-controls="setA" aria-selected="true">Encode</button>
