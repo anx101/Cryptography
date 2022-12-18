@@ -28,7 +28,7 @@ const cardType = () => {
    let value = ccNum().replace(/\D/g, "");
    let validateResult = "Please enter a number";
 
-   let RegObjects = {
+   let RegEx = {
       "Valid Credit Card Number (Visa)": /^(?:4[0-9]{12}(?:[0-9]{3})?)$/g,
       "Valid Credit Card Number (Master Card)": /^5[1-5][0-9]{14}$/g,
       "Valid Credit Card Number (AmericanExpress)": /3[47][0-9]{13}$/g,
@@ -39,8 +39,8 @@ const cardType = () => {
       validateResult = "Invalid Card Number!"
       return validateResult;
    } else {
-	   Object.keys(RegObjects).forEach( p => {
-		  if(RegObjects[p].test(value)) {
+	   Object.keys(RegEx).forEach( p => {
+		  if(RegEx[p].test(value)) {
 			 validateResult = p;
 		  }
 	   });

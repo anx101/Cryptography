@@ -22,9 +22,9 @@ document.getElementById("encode-button").addEventListener(
     const cover = document.getElementById("secret-message").value.split(" ");
     const key = document.getElementById("encodePw").value;
   
-    const encrypt = rc4Encryption(key, secret);
-    const secretmsg = TextZeroWidth(encrypt);
-    const encoded = cover[0] + "﻿" + secretmsg + " " + cover.slice(1).join(" ");
+    const encrypt = rc4(key, secret);
+    const hiddenMsg = txtZero(encrypt);
+    const encoded = cover[0] + "﻿" + hiddenMsg + " " + cover.slice(1).join(" ");
   
     encoderesults.innerHTML = encoded;
     document.getElementById("encoded-message").value = encoded;
@@ -35,13 +35,13 @@ document.getElementById("encode-button").addEventListener(
     const key = document.getElementById("decodePw").value; 
   
     const fword = cover.split(" ")[0];
-    const secretmsg = fword.split("﻿").slice(1).join("﻿");
-    const encrypt = zeroWidthToText(secretmsg);
-    const decodedMessage = rc4Encryption(key, encrypt);
+    const hiddenMsg = fword.split("﻿").slice(1).join("﻿");
+    const encrypt = zeroTxt(hiddenMsg);
+    const decodedMessage = rc4(key, encrypt);
     dencoderesults.innerHTML = decodedMessage;
   };
   
-  const rc4Encryption = (key, str) => {
+  const rc4 = (key, str) => {
     var s = [], j = 0, x, res = "";
     for (var i = 0; i < 256; i++) {
       s[i] = i;
@@ -66,8 +66,8 @@ document.getElementById("encode-button").addEventListener(
   };
   
   const pad = (num) => "00000000".slice(String(num).length) + num;
-  const TextToBinary = (usr) =>usr.split("").map((char) => pad(char.charCodeAt(0).toString(2))).join(" ");
-  const binaryToZeroWidth = (binary) =>binary.split("").map((binaryNum) => {
+  const txt2Bin = (usr) =>usr.split("").map((char) => pad(char.charCodeAt(0).toString(2))).join(" ");
+  const bin2Zero = (binary) =>binary.split("").map((binaryNum) => {
         const num = parseInt(binaryNum, 10);
         if (num === 1) {
           return "​";
@@ -77,12 +77,12 @@ document.getElementById("encode-button").addEventListener(
         return "";
       }).join("﻿");
   
-  const TextZeroWidth = (usr) => {
-    const usrBinary = TextToBinary(usr);
-    return binaryToZeroWidth(usrBinary);
+  const txtZero = (usr) => {
+    const userBin = txt2Bin(usr);
+    return bin2Zero(userBin);
   };
   
-  const ZeroWidthBinary = (string) => string.split("﻿").map((char) => {
+  const zeroBin = (string) => string.split("﻿").map((char) => {
         if (char === "​") {
           return "1";
         } else if (char === "‌") {
@@ -91,10 +91,10 @@ document.getElementById("encode-button").addEventListener(
         return " ";
       }).join("");
   
-  const BinaryToText = (string) =>string.split(" ").map((num) => String.fromCharCode(parseInt(num, 2))).join("");
+  const binToTxt = (string) =>string.split(" ").map((num) => String.fromCharCode(parseInt(num, 2))).join("");
   
-  const zeroWidthToText = (usr) => {
+  const zeroTxt = (usr) => {
     const ZeroWidthusr = usr.replace(/[^​‌‍﻿]/g, "");
-    const usrBinary = ZeroWidthBinary(ZeroWidthusr);
-    return BinaryToText(usrBinary);
+    const userBin = zeroBin(ZeroWidthusr);
+    return binToTxt(userBin);
   };
